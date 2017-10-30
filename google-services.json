@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "850854733768",
+    "firebase_url": "https://mrutrader-239bf.firebaseio.com",
+    "project_id": "mrutrader-239bf",
+    "storage_bucket": "mrutrader-239bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850854733768:android:e2e13920b77fcc36",
+        "android_client_info": {
+          "package_name": "mrutrader.mrutrader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850854733768-7gap7u7rk70un9nocii0vbcnm955d3l2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mrutrader.mrutrader",
+            "certificate_hash": "238b2d561c36f96ec0754adf9130706441bb1488"
+          }
+        },
+        {
+          "client_id": "850854733768-nqt1q3jhkdp9but6s5ertki2kdc015dh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-yJFxDSg7g9_8P2zeOBxbfVvSlsD2L14"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850854733768-nqt1q3jhkdp9but6s5ertki2kdc015dh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
