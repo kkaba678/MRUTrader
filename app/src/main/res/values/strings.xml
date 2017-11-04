@@ -17,4 +17,14 @@
     <string name="title_activity_register_">Register_Activity</string>
     <string name="action_login">Login</string>
     <string name="action_register">Register</string>
+    <string name="add_course">Add Course</string>
+    <string name="course_name">Course Name</string>
+    <string name="textbook">Textbook</string>
+    <string name="lecture_notes">Lecture Notes</string>
+    <string name="tutoring">Tutoring Services</string>
+    <string name="free">Free</string>
+    <string name="price">Price</string>
+    <string name="sell">Sell</string>
+    <string name="trade">Trade</string>
+    <string name="both">Both</string>
 </resources>
