@@ -36,7 +36,8 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
     private ProgressDialog progressDialog;
     private String userName;
     private static final String TAG = "MyActivity";
-
+    private String yasinNigga;
+    private  String testl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
