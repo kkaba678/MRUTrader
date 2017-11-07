@@ -24,8 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Course Name"
                 android:inputType="textPersonName"
-                android:text="@string/course_name"
                 android:visibility="visible" />
 
             <SearchView
@@ -73,8 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="@string/price" />
+                android:hint="@string/price"
+                android:inputType="numberDecimal" />
         </TableRow>
 
         <TableRow

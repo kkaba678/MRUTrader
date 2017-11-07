@@ -158,6 +158,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                         if (task.isSuccessful()) {
                             Toast.makeText(Register_Activity.this, "Registration Successful",
                                     Toast.LENGTH_SHORT).show();
+                            progressDialog.hide();
                         }
                         else
                             progressDialog.hide();
