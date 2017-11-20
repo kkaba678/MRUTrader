@@ -27,36 +27,6 @@ import static android.R.attr.name;
 
 public class AddCourseActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public class Course {
-
-        private String userID;
-        private String courseName;
-        private int price;
-        private boolean textBook;
-        private boolean lectureNotes;
-        private boolean tutoring;
-
-
-        public Course() {
-            // Default constructor required for calls to DataSnapshot.getValue(User.class)
-        }
-
-        public Course(String userID, String courseName,int price, boolean textBook, boolean lectureNotes, boolean tutoring) {
-            this.userID = userID;
-            this.courseName = courseName;
-            this.price = price;
-            this.textBook = textBook;
-            this.lectureNotes = lectureNotes;
-            this.tutoring = tutoring;
-        }
-
-        @Override
-        public String toString() {
-            return this.userID + ": " + this.courseName;
-        }
-
-    }
-
     private static final String TAG = "AddCourseActivity";
     EditText courseNameEditText;
     SearchView simpleSearchView;// = (SearchView) findViewById(R.id.simpleSearchView);
@@ -104,10 +74,10 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
             Map<String, Object> taskMap = new HashMap<>();
             taskMap.put("userID", userID);
             taskMap.put("course name", course.courseName);
-            taskMap.put("price", course.price);
-            taskMap.put("textBook", course.textBook);
-            taskMap.put("notes", course.lectureNotes);
-            taskMap.put("tutoring", course.tutoring);
+            taskMap.put("price", course.getPrice());
+            taskMap.put("textBook", course.getTextBook());
+            taskMap.put("notes", course.getLectureNotes());
+            taskMap.put("tutoring", course.getTutoring());
             mDatabase.child("Course").child(userID).push().setValue(taskMap);
         }
         catch(NumberFormatException e){
