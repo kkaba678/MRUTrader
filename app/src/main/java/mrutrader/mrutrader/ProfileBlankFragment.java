@@ -1,41 +1,39 @@
 package mrutrader.mrutrader;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
+import android.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ProfileBlankFragment extends Fragment implements View.OnClickListener{
 
     private static final int REQUEST_CODE = 1;
     private static final String TAG = "ProfileActivity";
@@ -46,37 +44,54 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private ArrayAdapter adapter;
     DatabaseReference mDatabase;
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
-        FirebaseAuth fireBaseAuth = FirebaseAuth.getInstance();
-
-        user = fireBaseAuth.getCurrentUser();
-        TextView textView = (TextView) findViewById(R.id.textViewProfileName);
-        textView.setText(user.getEmail());
-        if (user != null) {
-            userID = user.getUid();
-        }
+    public ProfileBlankFragment() {
+        // Required empty public constructor
     }
 
 
     @Override
-    protected void onStart(){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile_blank, container, false);
+        // Inflate the layout for this fragment
+        FirebaseAuth fireBaseAuth = FirebaseAuth.getInstance();
+
+        user = fireBaseAuth.getCurrentUser();
+        TextView textView = (TextView) view.findViewById(R.id.textView);
+        textView.setText(user.getEmail());
+        if (user != null) {
+            userID = user.getUid();
+        }
+
+        Button addCourse = (Button) view.findViewById(R.id.addCourseButton);
+        addCourse.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(getActivity(),AddCourseActivity.class);
+
+            intent.putExtra("userID", userID);
+            startActivityForResult(intent, REQUEST_CODE);
+        }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onStart(){
         super.onStart();
 
-         mDatabase = FirebaseDatabase.getInstance().getReference()
+        mDatabase = FirebaseDatabase.getInstance().getReference()
                 .child("Course").child(userID);
 
         list = new ArrayList<>();
-        final ListView listView = (ListView) findViewById(R.id.listView);
+        final ListView listView = (ListView) getView().findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
-    //Get datasnapshot at your "users" root node
+        //Get datasnapshot at your "users" root node
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Course");
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -108,8 +123,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             adapter.add(course);
                         }
 
-                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                Course obj = null;
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            Course obj = null;
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
@@ -136,33 +151,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
-
-        // Associate searchable configuration with the SearchView
-     /*  SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));*/
-        return true;
-    }
-
-    @Override
     public void onClick(View v) {
-        Button addCourse = (Button) findViewById(R.id.addCourseButton);
-        Intent intent = new Intent(this,AddCourseActivity.class);
 
-        intent.putExtra("userID", userID);
-        startActivityForResult(intent, REQUEST_CODE);
     }
 
 
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
 }

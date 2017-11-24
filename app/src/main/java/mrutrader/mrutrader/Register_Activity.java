@@ -31,13 +31,15 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
 
     private Button buttonRegister;
     private Button buttonLogin;
+    private Button button5;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private ProgressDialog progressDialog;
     private String userName;
     private static final String TAG = "MyActivity";
     private String yasinNigga;
-    private  String testl;
+    private String testl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,8 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
+        button5 = (Button) findViewById(R.id.button5);
+
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
 
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -87,7 +91,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void signInUser(){
+    private void signInUser() {
 
         String userName = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -114,14 +118,13 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-                           // Log.w(TAG, "signInWithEmail:failed", task.getException());
-                              Toast.makeText(Register_Activity.this, "Failed to sign in user user",
-                                   Toast.LENGTH_SHORT).show();
+                            // Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Toast.makeText(Register_Activity.this, "Failed to sign in user user",
+                                    Toast.LENGTH_SHORT).show();
                             progressDialog.hide();
-                        }
-                        else if(task.isSuccessful()) {
+                        } else if (task.isSuccessful()) {
                             finish();
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
 
 
@@ -130,7 +133,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                 });
     }
 
-    private void registerUser(){
+    private void registerUser() {
         String userName = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -159,14 +162,10 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                             Toast.makeText(Register_Activity.this, "Registration Successful",
                                     Toast.LENGTH_SHORT).show();
                             progressDialog.hide();
-                        }
-                        else
+                        } else
                             progressDialog.hide();
-                            Toast.makeText(Register_Activity.this, "Failed to register user",
-                                    Toast.LENGTH_SHORT).show();
-
-
-
+                        Toast.makeText(Register_Activity.this, "Failed to register user",
+                                Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -175,13 +174,14 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if(v == buttonRegister){
+        if (v == buttonRegister) {
             registerUser();
 
-        }
-
-        else if(v == buttonLogin){
+        } else if (v == buttonLogin) {
             signInUser();
+        } else if (v == button5) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 }

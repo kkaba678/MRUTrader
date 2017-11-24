@@ -6,26 +6,43 @@ package mrutrader.mrutrader;
 
 public class Course {
 
-    private String userID;
+    public String courseID;
+    public String userID;
     public String courseName;
-    private int price;
-    private boolean textBook;
-    private boolean lectureNotes;
-    private boolean tutoring;
-
+    public int price;
+    public boolean textBook;
+    public boolean lectureNotes;
+    public boolean tutoring;
+    public String courseKey;
+    public boolean trade;
 
     public Course() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Course(String userID, String courseName,int price, boolean textBook, boolean lectureNotes, boolean tutoring) {
+    public Course(String userID, String courseName,int price, boolean textBook, boolean lectureNotes, boolean tutoring, boolean trade) {
         this.userID = userID;
         this.courseName = courseName;
         this.price = price;
         this.textBook = textBook;
         this.lectureNotes = lectureNotes;
         this.tutoring = tutoring;
+        this.trade = trade;
     }
+
+
+    public Course(String userID, String courseName,int price, boolean textBook,
+                  boolean lectureNotes, boolean tutoring, String courseKey, boolean trade) {
+        this.userID = userID;
+        this.courseName = courseName;
+        this.price = price;
+        this.textBook = textBook;
+        this.lectureNotes = lectureNotes;
+        this.tutoring = tutoring;
+        this.courseKey = courseKey;
+        this.trade = trade;
+    }
+
 
     public int getPrice (){
         return this.price;
