@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
                     manager.beginTransaction().replace(R.id.content, profileBlankFragment, profileBlankFragment.getTag()).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    SearchFragment searchFragmentFragment = new SearchFragment();
+                    android.app.FragmentManager manager1 = getFragmentManager();
+                    manager1.beginTransaction().replace(R.id.content, searchFragmentFragment, searchFragmentFragment.getTag()).commit();
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);

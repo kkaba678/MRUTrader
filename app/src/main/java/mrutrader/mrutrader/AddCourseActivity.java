@@ -131,7 +131,7 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
                     taskMap.put("notes", String.valueOf(course.getLectureNotes()));
                     taskMap.put("tutoring", String.valueOf(course.getTutoring()));
                     taskMap.put("trade", String.valueOf(course.trade));
-                    mDatabase.child("Course").child(userID).push().setValue(taskMap);
+                    mDatabase.child("Course").push().setValue(taskMap);
                 } catch (NumberFormatException e) {
                     e.getMessage();
                 }

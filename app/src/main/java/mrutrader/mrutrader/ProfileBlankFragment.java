@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -83,7 +82,7 @@ public class ProfileBlankFragment extends Fragment implements View.OnClickListen
         super.onStart();
 
         mDatabase = FirebaseDatabase.getInstance().getReference()
-                .child("Course").child(userID);
+                .child("Course");
 
         list = new ArrayList<>();
         final ListView listView = (ListView) getView().findViewById(R.id.listView);
@@ -100,27 +99,28 @@ public class ProfileBlankFragment extends Fragment implements View.OnClickListen
                         List<String> lst = new ArrayList<String>(); // Result will be held Here
 
 
-                        Iterable<DataSnapshot> courses = dataSnapshot.child(userID).getChildren();
+                        Iterable<DataSnapshot> courses = dataSnapshot.getChildren();
                         Iterator<DataSnapshot> itr = courses.iterator();
                         DataSnapshot one = null;
                         String courseKey = null;
                         HashMap obj = null;
-                        while(itr.hasNext()){
+                        while(itr.hasNext()) {
                             one = itr.next();
                             courseKey = one.getKey();
                             obj = (HashMap) one.getValue();
-
-                            String courseName = (String)obj.get("course name");
-                            String userID = (String)obj.get("userID");
-                            String price = (String)(obj.get("price"));
-                            String textBook = (String)obj.get("textBook");
-                            String lectureNotes = (String)obj.get("notes");
-                            String tutoring = (String)obj.get("tutoring");
-                            String trade = (String)obj.get("trade");
-                            Course course = new Course(userID,courseName,Integer.parseInt(price),
-                                    Boolean.valueOf(textBook),Boolean.valueOf(lectureNotes),Boolean.valueOf(tutoring),
-                                    courseKey, Boolean.valueOf(trade));
-                            adapter.add(course);
+                            if (obj.get("userID").equals(userID)) {
+                                String courseName = (String) obj.get("course name");
+                                String userID = (String) obj.get("userID");
+                                String price = (String) (obj.get("price"));
+                                String textBook = (String) obj.get("textBook");
+                                String lectureNotes = (String) obj.get("notes");
+                                String tutoring = (String) obj.get("tutoring");
+                                String trade = (String) obj.get("trade");
+                                Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                        Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
+                                        courseKey, Boolean.valueOf(trade));
+                                adapter.add(course);
+                            }
                         }
 
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,7 +145,7 @@ public class ProfileBlankFragment extends Fragment implements View.OnClickListen
     public void deleteCourse(View view){
 
         if(deleteCourseKey != null){
-            mDatabase.child("Course").child(userID).child(deleteCourseKey).removeValue();
+            mDatabase.child("Course").child(deleteCourseKey).removeValue();
             onStart();
         }
     }
