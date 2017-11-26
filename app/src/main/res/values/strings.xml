@@ -41,4 +41,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="search_results">Search Results</string>
+    <string name="search_again">Search Again</string>
+    <string name="view_course">View Course</string>
+    <string name="chat">Chat</string>
 </resources>

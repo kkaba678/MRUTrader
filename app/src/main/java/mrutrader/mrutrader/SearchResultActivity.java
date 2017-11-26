@@ -4,6 +4,7 @@ package mrutrader.mrutrader;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchResultFragment extends Fragment implements View.OnClickListener {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     private static final int REQUEST_CODE = 1;
@@ -51,43 +52,57 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
     String notes;
     String tutoring;
     String trade;
-    Bundle bundle;
-
-
-    public SearchResultFragment() {
-        // Required empty public constructor
-    }
-
+    Intent intent;
+    ListView lv;
+    SearchView sv;
+    TextView textView;
+    ListView listView;
+    //ArrayAdapter<String> adapter;
+    Button viewButton;
+    Button searchButton;
+    Course object;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_result);
 
-      /*  FirebaseAuth fireBaseAuth = FirebaseAuth.getInstance();
+        intent = getIntent();
+       FirebaseAuth fireBaseAuth = FirebaseAuth.getInstance();
         user = fireBaseAuth.getCurrentUser();
         userID = user.getUid();
-        bundle = getArguments();*/
-        return view;
+
+
+        viewButton = (Button) findViewById(R.id.viewButton);
+        searchButton = (Button) findViewById(R.id.searchButton);
+
+
     }
 
     @Override
     public void onClick(View v) {
-
+        if (v == viewButton) {
+                String userID = object.userID;
+                String email = object.email;
+                Intent intent = new Intent(this, SearchedProfileActivity.class);
+                intent.putExtra("userID",userID);
+                intent.putExtra("email", email);
+                startActivity(intent);
+        }
     }
 
+    private void setObject(Course obj){object = obj;}
 
-    /*@Override
+    @Override
     public void onStart() {
         super.onStart();
 
 
-        cName = bundle.getString("courseName");
-        textBook = bundle.getString("textBook");
-        notes = bundle.getString("notes");
-        tutoring = bundle.getString("tutoring");
-        trade = bundle.getString("trade");
+        cName = intent.getStringExtra("courseName");
+        textBook = intent.getStringExtra("textBook");
+        notes = intent.getStringExtra("notes");
+        tutoring = intent.getStringExtra("tutoring");
+        trade = intent.getStringExtra("trade");
         yassin=0;
         if(textBook.equals("true"))
         {
@@ -110,9 +125,9 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                 .child("Course");
 
         list = new ArrayList<>();
-        final ListView listView = (ListView) getView().findViewById(R.id.listView);
+       listView = (ListView) findViewById(R.id.listView1);
 
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, list);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
         //Get datasnapshot at your "users" root node
@@ -160,7 +175,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -173,7 +189,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -186,7 +203,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -199,7 +217,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -215,7 +234,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -228,7 +248,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -241,7 +262,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -254,7 +276,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -267,7 +290,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -280,7 +304,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -303,7 +328,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -317,7 +343,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -332,7 +359,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -347,7 +375,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                             String lectureNotes = (String) obj.get("notes");
                                             String tutoring = (String) obj.get("tutoring");
                                             String trade = (String) obj.get("trade");
-                                            Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                            String email = (String) obj.get("email");
+                                            Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                     Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                     courseKey, Boolean.valueOf(trade));
                                             adapter.add(course);
@@ -367,7 +396,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                                         String lectureNotes = (String) obj.get("notes");
                                         String tutoring = (String) obj.get("tutoring");
                                         String trade = (String) obj.get("trade");
-                                        Course course = new Course(userID, courseName, Integer.parseInt(price),
+                                        String email = (String) obj.get("email");
+                                        Course course = new Course(email, userID, courseName, Integer.parseInt(price),
                                                 Boolean.valueOf(textBook), Boolean.valueOf(lectureNotes), Boolean.valueOf(tutoring),
                                                 courseKey, Boolean.valueOf(trade));
                                         adapter.add(course);
@@ -382,7 +412,7 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                                 obj = (Course) listView.getAdapter().getItem(position);
-                                deleteCourseKey = obj.courseKey;
+                                setObject(obj);
                             }
                         });
                     }

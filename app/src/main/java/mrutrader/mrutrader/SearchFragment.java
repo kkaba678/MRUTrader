@@ -1,5 +1,7 @@
 package mrutrader.mrutrader;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -66,13 +68,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
         lv = (ListView) view.findViewById(R.id.listView1);
         sv = (SearchView) view.findViewById(R.id.searchView1);
+        sv.setQueryHint("Course Name");
         textView = (TextView) view.findViewById(R.id.textView3);
         textView.setVisibility(View.INVISIBLE);
 
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, courses);
         lv.setAdapter(adapter);
-
-
 
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -91,8 +92,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                sv.setVisibility(View.INVISIBLE);
-                textView.setVisibility(View.VISIBLE);
+                //sv.setVisibility(View.INVISIBLE);
+                //textView.setVisibility(View.VISIBLE);
                 String txt = (String) lv.getAdapter().getItem(position);
                 textView.setText(txt);
             }
@@ -108,6 +109,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 if (checkFields()) {
 
                     textBookRadioButton = (RadioButton) getView().findViewById(R.id.textbookRadioButton);
+
                     notesRadioButton = (RadioButton) getView().findViewById(R.id.notesRadioButton);
                     tutorRadioButton = (RadioButton) getView().findViewById(R.id.tutorRadioButton);
                     tradeRadioButton = (RadioButton) getView().findViewById(R.id.tradeRadioButton);
@@ -115,18 +117,20 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     String cName = (String) textView.getText();
 
                     try {
+
                         boolean textBook = textBookRadioButton.isChecked();
                         boolean notes = notesRadioButton.isChecked();
                         boolean tutoring = tutorRadioButton.isChecked();
                         boolean trade = tradeRadioButton.isChecked();
                         Course course = new Course(userID, cName, 0, textBook, notes, tutoring, trade);
 
-                        Intent intent = new Intent(getActivity(), SearchResultFragment.class);
+
+                        Intent intent = new Intent(getActivity(),SearchResultActivity.class);
                         intent.putExtra("courseName", cName);
-                        intent.putExtra("textBook", textBook);
-                        intent.putExtra("notes", notes);
-                        intent.putExtra("tutoring", tutoring);
-                        intent.putExtra("trade", trade);
+                        intent.putExtra("textBook", String.valueOf(textBook));
+                        intent.putExtra("notes", String.valueOf(notes));
+                        intent.putExtra("tutoring", String.valueOf(tutoring));
+                        intent.putExtra("trade", String.valueOf(trade));
                         startActivity(intent);
 
 

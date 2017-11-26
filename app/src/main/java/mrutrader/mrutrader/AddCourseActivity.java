@@ -50,6 +50,7 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
     RadioButton tradeRadioButton;
     String userID;
     String courseID;
+    String email;
     ListView lv;
     SearchView sv;
     TextView textView;
@@ -65,14 +66,17 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
         Bundle b = intent.getExtras();
 
         userID = b.getString("userID");
-
+        email = b.getString("email");
         lv=(ListView) findViewById(R.id.listView1);
         sv=(SearchView) findViewById(R.id.searchView1);
+
+        sv.setQueryHint("Course Name");
+
         textView = (TextView) findViewById(R.id.textView3);
         textView.setVisibility(View.INVISIBLE);
-
         adapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,courses);
         lv.setAdapter(adapter);
+
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String text) {
@@ -88,12 +92,9 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                sv.setVisibility(View.INVISIBLE);
-                textView.setVisibility(View.VISIBLE);
                 String txt = (String)lv.getAdapter().getItem(position);
                 textView.setText(txt);
-                          }
+            }
         });
     }
 
@@ -119,12 +120,13 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
                     boolean tutoring = tutorRadioButton.isChecked();
                     boolean trade = tradeRadioButton.isChecked();
                     int price = Integer.parseInt(ePrice);
-                    Course course = new Course(userID, cName, price, textBook, notes, tutoring, trade);
+                    Course course = new Course(email, userID, cName, price, textBook, notes, tutoring, trade);
 
                     mDatabase = FirebaseDatabase.getInstance().getReference();
 
                     Map<String, String> taskMap = new HashMap<>();
                     taskMap.put("userID", userID);
+                    taskMap.put("email", email);
                     taskMap.put("course name", course.courseName);
                     taskMap.put("price", Integer.toString(course.getPrice()));
                     taskMap.put("textBook", String.valueOf(course.getTextBook()));

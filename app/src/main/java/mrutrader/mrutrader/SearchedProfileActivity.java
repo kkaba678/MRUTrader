@@ -1,21 +1,15 @@
 package mrutrader.mrutrader;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,55 +23,27 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ProfileBlankFragment extends Fragment implements View.OnClickListener{
+public class SearchedProfileActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE = 1;
-    private static final String TAG = "ProfileActivity";
-    private FirebaseUser user;
+    private Intent intent;
+    private TextView textView;
     private String userID;
-    private String deleteCourseKey = null;
     private ArrayList<String> list;
     private ArrayAdapter adapter;
-    private String email;
-    DatabaseReference mDatabase;
-
-    public ProfileBlankFragment() {
-        // Required empty public constructor
-    }
-
+    private DatabaseReference mDatabase;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile_blank, container, false);
-        // Inflate the layout for this fragment
-        FirebaseAuth fireBaseAuth = FirebaseAuth.getInstance();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_searched_profile);
 
-        user = fireBaseAuth.getCurrentUser();
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(user.getEmail());
-        if (user != null) {
-            userID = user.getUid();
-            email = user.getEmail();
-        }
+        intent = getIntent();
 
-        Button addCourse = (Button) view.findViewById(R.id.addCourseButton);
-        addCourse.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v) {
 
-            Intent intent = new Intent(getActivity(),AddCourseActivity.class);
+        textView = (TextView) findViewById(R.id.textView8);
+        //textView.setText(user.getEmail());
+        userID = intent.getStringExtra("userID");
 
-            intent.putExtra("userID", userID);
-            intent.putExtra("email", email);
-            startActivityForResult(intent, REQUEST_CODE);
-        }
-        });
-
-        return view;
     }
 
     @Override
@@ -88,9 +54,9 @@ public class ProfileBlankFragment extends Fragment implements View.OnClickListen
                 .child("Course");
 
         list = new ArrayList<>();
-        final ListView listView = (ListView) getView().findViewById(R.id.listView);
+        final ListView listView = (ListView) findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
         //Get datasnapshot at your "users" root node
@@ -132,7 +98,7 @@ public class ProfileBlankFragment extends Fragment implements View.OnClickListen
                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                                 obj = (Course)listView.getAdapter().getItem(position);
-                                deleteCourseKey = obj.courseKey;
+
                             }
                         });
                     }
@@ -145,22 +111,4 @@ public class ProfileBlankFragment extends Fragment implements View.OnClickListen
     }
 
 
-    public void deleteCourse(View view){
-
-        if(deleteCourseKey != null){
-            mDatabase.child("Course").child(deleteCourseKey).removeValue();
-            onStart();
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    }
 }
