@@ -39,7 +39,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
 
     private static final int REQUEST_CODE = 1;
-    private static final String TAG = "SearchResultFragment";
     private FirebaseUser user;
     private String userID;
     private String deleteCourseKey = null;

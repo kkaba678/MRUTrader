@@ -69,10 +69,7 @@ public class Course {
         this.trade = trade;
     }
 
-
-    public int getPrice (){
-        return this.price;
-    }
+    public int getPrice (){return this.price;}
 
     public boolean getTextBook (){
         return this.textBook;
@@ -89,7 +86,6 @@ public class Course {
     @Override
     public String toString() {
         return this.courseName + "\n $" + this.price;
-
     }
 
 }
