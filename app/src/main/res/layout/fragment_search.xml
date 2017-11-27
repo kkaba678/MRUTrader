@@ -84,7 +84,7 @@
                 android:id="@+id/tutorRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/ic_tutorring"
+                android:drawableRight="@drawable/ic_action_tutor"
                 android:paddingRight="30dp"
                 android:text="@string/tutoring"
                 android:textColor="@android:color/background_light"
@@ -99,6 +99,8 @@
                 android:id="@+id/notesRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_action_notes_new"
+                android:paddingRight="25dp"
                 android:text="@string/lecture_notes"
                 android:textColor="@android:color/background_light"
                 app:buttonTint="@android:color/background_light" />
@@ -113,6 +115,8 @@
                 android:id="@+id/textbookRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_action_textbook"
+                android:paddingRight="25dp"
                 android:text="@string/textbook"
                 android:textColor="@android:color/background_light"
                 app:buttonTint="@android:color/background_light" />
@@ -126,6 +130,8 @@
                 android:id="@+id/tradeRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_action_trade"
+                android:paddingRight="25dp"
                 android:text="@string/trade"
                 android:textColor="@android:color/background_light"
                 app:buttonTint="@android:color/background_light" />
