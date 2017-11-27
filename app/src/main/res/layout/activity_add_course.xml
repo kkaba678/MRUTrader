@@ -89,7 +89,7 @@
                 android:layout_marginRight="8dp"
 
                 android:choiceMode="singleChoice"
-                android:listSelector="#666666"
+                android:listSelector="@android:color/background_light"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
