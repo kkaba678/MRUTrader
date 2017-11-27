@@ -10,14 +10,16 @@
     <ListView
         android:id="@+id/listView1"
         android:layout_width="379dp"
+
         android:layout_height="259dp"
-
         android:layout_marginBottom="160dp"
-        android:layout_marginEnd="8dp"
 
+
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:choiceMode="singleChoice"
-        android:listSelector="#666666"
+        android:listSelector="@android:color/background_light"
+        android:smoothScrollbar="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
