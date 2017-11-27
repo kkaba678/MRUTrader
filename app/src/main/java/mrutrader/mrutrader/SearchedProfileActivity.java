@@ -41,7 +41,7 @@ public class SearchedProfileActivity extends AppCompatActivity {
 
 
         textView = (TextView) findViewById(R.id.textView8);
-        //textView.setText(user.getEmail());
+        textView.setText(intent.getStringExtra("email"));
         userID = intent.getStringExtra("userID");
 
     }
