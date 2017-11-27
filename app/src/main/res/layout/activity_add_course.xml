@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="@drawable/backgroundimageblue"
     tools:context="mrutrader.mrutrader.AddCourseActivity">
 
     <TableLayout
 
         android:layout_width="368dp"
         android:layout_height="495dp"
-        android:layout_marginTop="-20dp"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,10 +36,10 @@
 
             <SearchView
                 android:id="@+id/searchView1"
-                android:iconifiedByDefault="false"
                 android:layout_width="wrap_content"
-                app:iconifiedByDefault="false"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                app:iconifiedByDefault="false" />
 
 
         </TableRow>
@@ -77,8 +77,10 @@
                 android:ems="10"
                 android:hint="@string/price"
                 android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
                 android:singleLine="true"
-                android:inputType="numberDecimal" />
+                android:textColor="@android:color/background_light"
+                android:textColorHint="?attr/colorButtonNormal" />
         </TableRow>
 
         <TableRow
@@ -89,7 +91,8 @@
                 android:id="@+id/tutorRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tutoring" />
+                android:text="@string/tutoring"
+                android:textColor="@android:color/background_light" />
         </TableRow>
 
         <TableRow
@@ -100,7 +103,8 @@
                 android:id="@+id/notesRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/lecture_notes" />
+                android:text="@string/lecture_notes"
+                android:textColor="@android:color/background_light" />
 
         </TableRow>
 
@@ -112,7 +116,8 @@
                 android:id="@+id/textbookRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/textbook" />
+                android:text="@string/textbook"
+                android:textColor="@android:color/background_light" />
         </TableRow>
 
         <TableRow
@@ -123,7 +128,8 @@
                 android:id="@+id/tradeRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/trade" />
+                android:text="@string/trade"
+                android:textColor="@android:color/background_light" />
 
         </TableRow>
 
@@ -133,6 +139,7 @@
 
             <Button
                 android:id="@+id/button2"
+                style="@android:style/Widget.Holo.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
@@ -144,10 +151,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/button4"
+                style="@android:style/Widget.Holo.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel" />

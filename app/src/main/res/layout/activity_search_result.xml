@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundimageblue"
     tools:context="mrutrader.mrutrader.SearchResultActivity">
 
     <ListView
@@ -30,9 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/search_results"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textColor="@android:color/background_light"
+        android:textSize="27sp"
         app:layout_constraintBottom_toTopOf="@+id/listView1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -40,6 +42,7 @@
 
     <Button
         android:id="@+id/viewButton"
+        style="@android:style/Widget.Holo.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -57,6 +60,7 @@
 
     <Button
         android:id="@+id/searchButton"
+        style="@android:style/Widget.Holo.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
