@@ -65,7 +65,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
-        button5 = (Button) findViewById(R.id.button5);
+
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
 

@@ -2,8 +2,10 @@ package mrutrader.mrutrader;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,6 +95,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     private void setObject(Course obj){object = obj;}
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onStart() {
         super.onStart();
@@ -422,6 +425,10 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                         //handle databaseError
                     }
                 });
+
+        TextView textView = (TextView) findViewById(R.id.textView2);
+        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_home_black_24dp,0,0,0);
+
     }
     public void getResulsFor0(String userID,String cName){
 

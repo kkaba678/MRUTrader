@@ -81,6 +81,8 @@
                 android:id="@+id/tutorRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_tutorring"
+                android:paddingRight="30dp"
                 android:text="@string/tutoring" />
         </TableRow>
 
